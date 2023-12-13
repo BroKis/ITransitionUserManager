@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using UserManagement.Client.Models
+@using UserManagement.IdentityDAL.Model
+@model UserForSignUp
+@inject UserManager<ApplicationUser> UserManager;
+
+@{
+    ViewData["Title"] = "Registration Form";
+}
+
+        <div class="row">
+            <div class="col-sm-6 text-black">
+
+                <div class="px-5 ms-xl-4">
+                    <i class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4" style="color: #709085;"></i>
+                </div>
+
+                <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+
+                    <form method="post" asp-controller="Account" asp-action="RegistrationForm" class="form-register">
+
+                        <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Registration </h3>
+
+                        <div asp-validation-summary="ModelOnly"></div>
+                        <div class="form-group">
+                            <label asp-for="Email"></label><br />
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Name"></label><br />
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PhoneNumber"></label><br />
+                            <input asp-for="PhoneNumber" class="form-control" />
+                            <span asp-validation-for="PhoneNumber"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password"></label><br />
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PasswordConfirm"></label><br />
+                            <input asp-for="PasswordConfirm" class="form-control" />
+                            <span asp-validation-for="PasswordConfirm"></span>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-block mt-3">Registrate</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>

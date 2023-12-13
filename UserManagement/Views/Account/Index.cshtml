@@ -1,0 +1,70 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using UserManagement.Client.Models
+@using UserManagement.IdentityDAL.Model
+@inject UserManager<ApplicationUser> UserManager;
+@model IEnumerable<UserForDisplay>
+@{
+    ViewData["Title"] = "Users Table";
+}
+@if (!User.Identity.IsAuthenticated)
+{
+    <p>You must to be an registrated or authorized</p>
+}
+else
+{
+    <form method="post" asp-controller="Account">
+        <div class="row">
+            <div class="btn-toolbar" role="toolbar" aria-label="Button toolbar">
+                <div class="btn-group mr-2" role="group" aria-label="group">
+                    <button type="submit" class="btn btn-secondary" asp-action="Unlock"><i class="fa fa-unlock"></i></button>
+                    <button type="submit" class="btn btn-secondary" asp-action="Lock"><i class="fa fa-lock"></i></button>
+                    <button type="submit" class="btn btn-secondary" asp-action="Delete"><i class="fa fa-trash"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="select_all" class="styled"></input></th>
+                        <th>Name</th>
+                        <th>e-Mail</th>
+                        <th>Last Login</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+
+                            <td class="align-middle">
+                                <input type="checkbox" name="selectedIds" id="@user.Id" value="@user.Id" class="styled" />
+                            </td>
+                            <td class="align-middle">
+                                @Html.DisplayFor(x => user.Name)
+                            </td>
+                            <td class="align-middle">
+                                @Html.DisplayFor(x => user.Email)
+                            </td>
+                            <td class="align-middle">
+                                @Html.DisplayFor(x => user.AuthorizationDate)
+                            </td>
+                            <td class="align-middle">
+                                @Html.DisplayFor(x => user.Status)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </form>   
+}
+@section Scripts{
+    <script>
+        $("#select_all").click(function () {
+            $(':checkbox').prop('checked', this.checked);
+        });
+    </script>
+}

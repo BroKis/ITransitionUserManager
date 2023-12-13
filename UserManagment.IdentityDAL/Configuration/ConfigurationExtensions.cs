@@ -25,6 +25,11 @@ namespace UserManagement.IdentityDAL.Configuration
             {
                 opt.SignIn.RequireConfirmedAccount = false;
                 opt.User.RequireUniqueEmail = true;
+                opt.Password.RequiredLength = 1;
+                opt.Password.RequireNonAlphanumeric = false; opt.Password.RequireDigit = false;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireUppercase = false;
+               
             }).AddRoles<ApplicationRole>()
             .AddRoleManager<RoleManager<ApplicationRole>>()
             .AddDefaultUI()

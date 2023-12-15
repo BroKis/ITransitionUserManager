@@ -18,7 +18,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    
     app.UseHsts();
 }
 
@@ -35,6 +34,7 @@ app.UseUserDestroyer();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Account}/{action=Index}/{id?}");   
+    pattern: "{controller=Account}/{action=Index}/{id?}");
+
 
 app.Run();

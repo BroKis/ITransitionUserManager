@@ -149,5 +149,15 @@ namespace UserManagement.Client.Controllers
                 Description = "You should to pick users"
             });
         }
+
+        [Route("Account/Error")]
+        public IActionResult Error()
+        {
+            return View("Error", new ErrorViewModel
+            {
+                Controller = "Account",
+                Description = "You're blocked. Please contact the administrator"
+            });
+        }
     }
 }

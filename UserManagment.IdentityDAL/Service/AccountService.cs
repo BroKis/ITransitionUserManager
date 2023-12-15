@@ -79,8 +79,11 @@ namespace UserManagement.IdentityDAL.Service
                 var result = await _signInManager.PasswordSignInAsync(user, password, false, false);
 
                 if (!result.Succeeded)
-                    return response.GetResponse(false, StatusCode.NotFound, "Invalid email or password");
-
+                {
+                    string message = result.IsLockedOut == true ? "You're blocked. Please contact the administrator" : "Invalid email or password";
+                    StatusCode code = result.IsLockedOut == true ? StatusCode.BadRequest : StatusCode.NotFound;
+                    return response.GetResponse(false, code, message);
+                }
                 user.AuthorizationDate = DateOnly.FromDateTime(DateTime.Now);
                 await _userManager.UpdateAsync(user);
                 return response.GetResponse(true, StatusCode.OK, "The user was sign in successfully");
@@ -150,7 +153,5 @@ namespace UserManagement.IdentityDAL.Service
                 return response.GetResponse(false, StatusCode.OK, ex.Message);
             }
         }
-       
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using UserManagement.IdentityDAL.Model;
 
 namespace UserManagement.Client.Middleware
@@ -25,7 +26,7 @@ namespace UserManagement.Client.Middleware
                 {
                     //Log the user out and redirect back to homepage
                     await signInManager.SignOutAsync();
-                    httpContext.Response.Redirect("/");
+                    httpContext.Response.Redirect("Account/Error");
                 }
             }
             await _next(httpContext);

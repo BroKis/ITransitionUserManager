@@ -14,7 +14,7 @@ namespace UserManagement.IdentityDAL.Configuration
             builder.Property(u => u.AuthorizationDate).HasColumnType("DATE");
             builder.Property(u => u.Status);
             builder.HasMany(e => e.UserRoles).WithOne(e => e.User).HasForeignKey(e => e.UserId).IsRequired();
-            
+
         }
     }
 }

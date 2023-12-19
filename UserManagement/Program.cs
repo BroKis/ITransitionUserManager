@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
-using System.Data;
 using UserManagement.Client.Configuration;
 using UserManagement.IdentityDAL.Configuration;
 

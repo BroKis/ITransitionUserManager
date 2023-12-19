@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using UserManagement.Client.Models;
 using UserManagement.IdentityDAL.Model;
 using UserManagement.IdentityDAL.Service;
+using UserManagement.IdentityDAL.Auxillary;
 
 namespace UserManagement.Client.Controllers
 {
@@ -94,23 +95,23 @@ namespace UserManagement.Client.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Lock(string [] selectedIds)
+        public async Task<IActionResult> Lock(string[] selectedIds)
         {
             if (ModelState.IsValid)
             {
                 foreach (string id in selectedIds)
                 {
                     ApplicationUser user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == Convert.ToInt32(id));
-                    var result = await _accountService.BlockUser(user);
+                    var result = await _accountService.SetNewUserStatus(user,Status.Blocked, new DateTime(9999, 12, 31), true);
                     _logger.LogInformation(result.Description);
                 }
                 return RedirectToAction("Index", "Account");
             }
-           return View("Error", new ErrorViewModel
-           {
+            return View("Error", new ErrorViewModel
+            {
                 Controller = "Account",
                 Description = "You should to pick users"
-           });
+            });
         }
         [HttpPost]
         public async Task<IActionResult> Unlock(string[] selectedIds)
@@ -120,7 +121,7 @@ namespace UserManagement.Client.Controllers
                 foreach (string id in selectedIds)
                 {
                     ApplicationUser user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == Convert.ToInt32(id));
-                    var result = await _accountService.UnblockUser(user);
+                    var result = await _accountService.SetNewUserStatus(user, Status.Active, DateTime.Now - TimeSpan.FromMinutes(1), true);
                     _logger.LogInformation(result.Description);
                 }
                 return RedirectToAction("Index", "Account");

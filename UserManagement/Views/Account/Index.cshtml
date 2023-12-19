@@ -29,7 +29,8 @@ else
                         <th><input type="checkbox" id="select_all" class="styled"></input></th>
                         <th>Name</th>
                         <th>e-Mail</th>
-                        <th>Last Login</th>
+                        <th>Date of Last Login</th>
+                        <th>Date of Authorization</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -49,6 +50,9 @@ else
                             </td>
                             <td class="align-middle">
                                 @Html.DisplayFor(x => user.AuthorizationDate)
+                            </td>
+                            <td class="align-middle">
+                                @Html.DisplayFor(x => user.RegistrationDate)
                             </td>
                             <td class="align-middle">
                                 @Html.DisplayFor(x => user.Status)

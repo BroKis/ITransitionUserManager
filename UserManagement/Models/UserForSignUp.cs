@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using UserManagement.IdentityDAL.Auxillary;
 
 namespace UserManagement.Client.Models
 {
@@ -16,7 +15,7 @@ namespace UserManagement.Client.Models
 
         [Required]
         [Display(Name = "Номер телефона")]
-        [StringLength(16, ErrorMessage = "Поле {0} должно иметь минимум {2} и максимум {1} символов", MinimumLength = 10)]
+        [StringLength(20, ErrorMessage = "Поле {0} должно иметь минимум {2} и максимум {1} символов", MinimumLength = 1)]
         public string PhoneNumber { get; set; } = string.Empty;
 
         [Required]

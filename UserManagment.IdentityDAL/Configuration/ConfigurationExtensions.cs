@@ -1,13 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UserManagement.IdentityDAL.Application;
 using UserManagement.IdentityDAL.Model;
 using UserManagement.IdentityDAL.Service;
@@ -25,11 +18,12 @@ namespace UserManagement.IdentityDAL.Configuration
             {
                 opt.SignIn.RequireConfirmedAccount = false;
                 opt.User.RequireUniqueEmail = true;
+                opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789 ";
                 opt.Password.RequiredLength = 1;
                 opt.Password.RequireNonAlphanumeric = false; opt.Password.RequireDigit = false;
                 opt.Password.RequireLowercase = false;
                 opt.Password.RequireUppercase = false;
-               
+
             }).AddRoles<ApplicationRole>()
             .AddRoleManager<RoleManager<ApplicationRole>>()
             .AddDefaultUI()
@@ -44,7 +38,7 @@ namespace UserManagement.IdentityDAL.Configuration
         private static void AddAccountService(this IServiceCollection service)
         {
             service.AddScoped<IAccountService, AccountService>();
-            
+
         }
     }
 }

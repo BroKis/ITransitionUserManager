@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using UserManagement.IdentityDAL.Model;
 
 namespace UserManagement.Client.Middleware
@@ -17,7 +16,7 @@ namespace UserManagement.Client.Middleware
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
         {
-            
+
             if (!string.IsNullOrEmpty(httpContext.User.Identity.Name))
             {
                 var user = await userManager.FindByNameAsync(httpContext.User.Identity.Name);

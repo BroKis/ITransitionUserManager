@@ -1,24 +1,17 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UserManagement.IdentityDAL.Configuration;
 using UserManagement.IdentityDAL.Model;
 
 namespace UserManagement.IdentityDAL.Application
 {
-    public class AuthDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,int>
+    public class AuthDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
     {
-        
+
 
         public AuthDbContext(DbContextOptions<AuthDbContext> options) : base(options)
         {
-            
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
